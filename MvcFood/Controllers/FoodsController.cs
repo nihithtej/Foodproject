@@ -50,17 +50,43 @@ namespace MvcFood.Controllers
             // .FirstOrDefaultAsync(m => m.fdcId == id);
             //n.value=nutrient.valu
 
+            //List<String> nut = (from f in _context.Food_Nutrient
+            //          join m in _context.Nutrient on f.nutrient.nutrientId equals m.nutrientId
+            //          where f.food.fdcId == id
+            //          select new { nutrientcol = m.nutrientName }).ToList();
 
-
-
+            
+            
             if (foodnutrients == null)
             {
                 return NotFound();
             }
 
+            var nut = foodnutrients.ToList();
+            var l = new List<String>();
+            string s="[\"";
+           
+            foreach(FoodNutrients item in nut)
+            {
+                l.Add(item.nutrientvm.nutrientName);
+                s= s+item.nutrientvm.nutrientName+"\",";
+            }
+            s=s.Remove(s.Length-1);
+            s = s + "]";
+            s = "[\"Carb\",\"Fat\"]";
 
-
-            return View(foodnutrients);
+            //var l = nut[0];
+            //String h = l.nutrientvm.nutrientName;
+            //k = 1;
+            var model = new Viewmodel();
+            model.foodnutrients = foodnutrients;
+            model.str = s;
+            //foreach (FoodNutrients item2 in model.foodnutrients)
+            //{
+            //    var q = item2.foodvm.food;
+            //}
+            
+            return View(model);
         }
     
 

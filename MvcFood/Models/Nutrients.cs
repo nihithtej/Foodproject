@@ -15,4 +15,11 @@ namespace MvcFood.Models
 
     }
 
+    public class Viewmodel
+    {
+        public  IEnumerable<FoodNutrients> foodnutrients {get; set;}
+        public string str{ get; set; }
+        //public string num { get; set; }
+    }
+
 }
