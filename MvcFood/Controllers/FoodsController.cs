@@ -41,24 +41,28 @@ namespace MvcFood.Controllers
                 return NotFound();
             }
 
-            
-            //List<Nutrients> n = new List<Nutrients>();
-            var nutrient = from f in _context.Food_Nutrient
-                           join m in _context.Nutrient on f.nutrient.nutrientId equals m.nutrientId
-                               where f.food.fdcId == id
-                               select new { f.value, f.unitName,m.nutrientName };
+
+            var foodnutrients = from f in _context.Food_Nutrient
+                                join m in _context.Nutrient on f.nutrient.nutrientId equals m.nutrientId
+                                where f.food.fdcId == id
+                                select new FoodNutrients { foodvm = f, nutrientvm = m };
             //var food = await _context.Food
-            //    .FirstOrDefaultAsync(m => m.fdcId == id);
+            // .FirstOrDefaultAsync(m => m.fdcId == id);
             //n.value=nutrient.valu
 
-            var n = nutrient.ToList();
-            if (nutrient == null)
+
+
+
+            if (foodnutrients == null)
             {
                 return NotFound();
             }
 
-            return View(n);
+
+
+            return View(foodnutrients);
         }
+    
 
         // GET: Foods/Create
         public IActionResult Create()

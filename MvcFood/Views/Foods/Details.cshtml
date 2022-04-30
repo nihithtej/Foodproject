@@ -1,28 +1,31 @@
-﻿
-@model List<String>
+﻿@model IEnumerable<MvcFood.Models.FoodNutrients>
+
+
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Food Nutrition Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Food</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model)
-        </dt>
 
-    </dl>
-</div>
+<h1>Nutrition Details</h1>
 
-@foreach (var item in Model)
-{
-    <div>
-        @item
-        <hr />
-    </div>
-}
 
+
+<table class="table table-striped">
+    <tr>
+        <td>Nutrient Name</td>
+        <td>Value</td>
+        <td>Units</td>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.nutrientvm.nutrientName</td>
+            <td>@item.foodvm.value</td>
+            <td>@item.foodvm.unitName</td>
+
+        </tr>
+    }
+</table>

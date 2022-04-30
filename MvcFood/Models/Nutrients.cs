@@ -5,13 +5,13 @@ namespace MvcFood.Models
 {
 
 
-    public class Nutrients
+    public class FoodNutrients
     {
-       public string nutrientName { get; set; }
-        
-        public float value { get; set; }
+        public Food_Nutrient foodvm { get; set; }
 
-        public string unitName { get; set; }
+        public Nutrient nutrientvm { get; set; }
+
+
 
     }
 
