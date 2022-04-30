@@ -36,9 +36,9 @@
     new Chart(document.getElementById("pie-chart"), {
         type: 'pie',
         data: {
-            labels: [@Html.Raw(@Model.str)],
+            labels: @Html.Raw(@Model.str),
             datasets: [{
-                label: "Population (millions)",
+                label: "Nutrition Information",
                 backgroundColor: ["#3e95cd", "#8e5ea2"],
                 data: @Html.Raw(@Model.num)
             }]
@@ -46,7 +46,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Predicted world population (millions) in 2050'
+                text: 'Nutrition Information'
             }
         }
     });
