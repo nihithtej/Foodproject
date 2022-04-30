@@ -20,9 +20,17 @@ namespace MvcFood.Controllers
         }
 
         // GET: Foods
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Food.ToListAsync());
+            var foods = from f in _context.Food
+                         select f;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                foods = foods.Where(s => s.description.Contains(searchString));
+            }
+            var v = foods.ToListAsync();
+            return View(await v);
         }
 
         // GET: Foods/Details/5
@@ -33,14 +41,23 @@ namespace MvcFood.Controllers
                 return NotFound();
             }
 
-            var food = await _context.Food
-                .FirstOrDefaultAsync(m => m.fdcId == id);
-            if (food == null)
+            
+            //List<Nutrients> n = new List<Nutrients>();
+            var nutrient = from f in _context.Food_Nutrient
+                           join m in _context.Nutrient on f.nutrient.nutrientId equals m.nutrientId
+                               where f.food.fdcId == id
+                               select new { f.value, f.unitName,m.nutrientName };
+            //var food = await _context.Food
+            //    .FirstOrDefaultAsync(m => m.fdcId == id);
+            //n.value=nutrient.valu
+
+            var n = nutrient.ToList();
+            if (nutrient == null)
             {
                 return NotFound();
             }
 
-            return View(food);
+            return View(n);
         }
 
         // GET: Foods/Create
@@ -139,8 +156,16 @@ namespace MvcFood.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            List<int> fn_ids = _context.Food_Nutrient.Where(x => x.food.fdcId == id).Select(x => x.FNId).ToList();
+            foreach( int i in fn_ids){
+                var fn = await _context.Food_Nutrient.FindAsync(i);
+                _context.Food_Nutrient.Remove(fn);
+            }
+
             var food = await _context.Food.FindAsync(id);
             _context.Food.Remove(food);
+                   
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
