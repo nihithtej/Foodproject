@@ -5,7 +5,7 @@ namespace MvcFood.Models
 {
     
     
-        public class Food
+        public class FoodTable
         {
             [Key]
             public int fdcId { get; set; }

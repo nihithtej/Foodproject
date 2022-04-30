@@ -1,71 +1,228 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+﻿/*Logo*/
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    background: rgb(233,223, 208);
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+.page-container {
+    position: relative;
+    min-height: 70vh;
+}
+
+.content-wrap {
+    padding-bottom: 0.5rem; /* Footer height */
+}
+
+
+.Logo-image {
+    width: 5%;
+    height: 5%;
+    float: left;
+    /* background: #FDCA9A;*/
+    /*background: #F07167;*/
+    background: #C52B4A;
+    padding-top: 1%;
+    padding-bottom: .8%;
+    padding-left: 1%;
+}
+/* h1*/
+h1 {
+    padding-left: 7%;
+    padding-top: 1.5%;
+    padding-bottom: 2%;
+    /*background: #DA5872;*/
+    background: #C52B4A;
+    /*color: #005C78;
+        color: #094A5F;
+    */
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Copperplate, Arial, sans-serif;
+}
+
+/* index */
+.index {
+    text-align: right;
+    padding-right: 10%;
+    font-family: Copperplate, Arial, sans-serif;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-top: 4px solid white;
+    margin-top: -1.5%;
+    /*background: #0081A7;*/
+    background: #0A5067;
+    color: #FDCA9A;
+    font-family: Copperplate, Arial, sans-serif;
+}
+
+    .index a {
+        color: #F2847C;
+        font-family: Copperplate, Arial, sans-serif;
+    }
+
+    .index .btn {
+        color: #F9C1BD;
+        /*background: #00789C;*/
+        background: #0E6A89;
+        text-decoration: none;
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+        .index .btn:hover {
+            background: rgba(31, 122, 140, 80%);
+        }
+
+h2 {
+    /* color: #EE5A50; */
+    color: #0b566f;
+}
+
+    h2 a {
+        color: #F2847C;
+        font-family: Copperplate, Arial, sans-serif;
+    }
+
+.btn {
+    color: #F9C1BD;
+    background: #00789C;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.six-image {
+    width: 30%;
+    height: 30%;
+    float: right;
+}
+
+p {
+    color: #083E50;
+}
+
+form {
+    color: #083E50;
+}
+
+.about {
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0.5rem;
+}
+
+.row {
+    display: flex;
+    margin-top: 5%;
+    color: white;
+    text-align: center;
+    background: #6B8F71;
+}
+
+.search {
+    display: flex;
+}
+
+.flex-search {
+    flex: 1 1 100px;
+    color: #263328;
+}
+
+.flex-item {
+    flex: 1 1 100px;
+    color: #263328;
+}
+
+    .flex-item p {
+        flex: 1 1 100px;
+        color: #263328;
+    }
+
+    .flex-item a {
+        color: #0B566F;
+    }
+
+/*address {
+    margin-bottom: 20px;
+    font-style: normal;
+    line-height: 1.42857143;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col1 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+.col2 {
+    float: inline-start;
+    width: 25%;
+    margin-top: 6px;
+}
+    */
+
+form.example input[type=text] {
+    padding: 2%;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    border-spacing: 15px;
+    margin-bottom: 40%
+}
+
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 2%;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    border-spacing: 15px;
+}
+
+    form.example button:hover {
+        background: #0b7dda;
+    }
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th {
+    color: #0b566f;
+    text-align: left;
+    padding: 16px;
+}
+
+td {
+    text-align: left;
+    padding: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }

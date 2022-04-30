@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcFood.Data;
 using MvcFood.Models;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace MvcFood.Controllers
 {
@@ -18,12 +19,79 @@ namespace MvcFood.Controllers
         {
             _context = context;
         }
+        HttpClient httpClient;
 
-        // GET: Foods
-        public async Task<IActionResult> Index(string searchString)
+        static string BASE_URL = "https://api.nal.usda.gov/fdc/v1/";
+        static string API_KEY = "ZjvbCsuwLqg3LGCJJblZtswa3N2wrPAB5tu6WEjg";
+
+        public IActionResult Index(string searchString)
+        {
+            httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Add("X-Api-Key", API_KEY);
+            httpClient.DefaultRequestHeaders.Accept.Add(
+                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            string FOOD_NUTRIITION_PATH = BASE_URL + "/search?query=%22%2B" + searchString + "%22&dataType=Foundation";
+            string nutritionData = "";
+
+            Foodresults foodresults = null;
+
+
+            httpClient.BaseAddress = new Uri(FOOD_NUTRIITION_PATH);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(FOOD_NUTRIITION_PATH).GetAwaiter().GetResult();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    nutritionData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+                }
+
+                if (!nutritionData.Equals(""))
+                {
+                    foodresults = JsonConvert.DeserializeObject<Foodresults>(nutritionData);
+                    foodresults = JsonConvert.DeserializeObject<Foodresults>(nutritionData);
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            //foreach(Foodresults item in foodresults)
+            //Food food1 = new Food();
+
+            //food1.description = foodresults.foodsapi.;
+
+            //context.Food.Add(food1);
+            //context.SaveChanges();
+
+            //Nutrient nutrient1 = new Nutrient();
+            //nutrient1.nutrientName = "Carbohydrates";
+            //nutrient1.nutrientNumber = 1;
+            //context.Nutrient.Add(nutrient1);
+            //context.SaveChanges();
+
+            //Food_Nutrient fn1 = new Food_Nutrient();
+            //fn1.value = 1;
+            //fn1.unitName = "mg";
+            //fn1.food = food1;
+            //fn1.nutrient = nutrient1;
+            //context.Food_Nutrient.Add(fn1);
+            //context.SaveChanges();
+
+            //;
+            return View(foodresults);
+        }
+
+        // GET: Foods 
+        public async Task<IActionResult> Display(string searchString)
         {
             var foods = from f in _context.Food
-                         select f;
+                        select f;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -55,8 +123,8 @@ namespace MvcFood.Controllers
             //          where f.food.fdcId == id
             //          select new { nutrientcol = m.nutrientName }).ToList();
 
-            
-            
+
+
             if (foodnutrients == null)
             {
                 return NotFound();
@@ -64,14 +132,14 @@ namespace MvcFood.Controllers
 
             var nut = foodnutrients.ToList();
             //var l = new List<String>();
-            string s="[";
-           
-            foreach(FoodNutrients item in nut)
+            string s = "[";
+
+            foreach (FoodNutrients item in nut)
             {
                 //l.Add(item.nutrientvm.nutrientName);
-                s= s+"\""+item.nutrientvm.nutrientName+"\",";
+                s = s + "\"" + item.nutrientvm.nutrientName + "\",";
             }
-            s=s.Remove(s.Length-1);
+            s = s.Remove(s.Length - 1);
             s = s + "]";
             //s = "[\"Carb\",\"Fat\"]";
 
@@ -97,10 +165,10 @@ namespace MvcFood.Controllers
             //{
             //    var q = item2.foodvm.food;
             //}
-            
+
             return View(model);
         }
-    
+
 
         // GET: Foods/Create
         public IActionResult Create()
@@ -199,15 +267,16 @@ namespace MvcFood.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             List<int> fn_ids = _context.Food_Nutrient.Where(x => x.food.fdcId == id).Select(x => x.FNId).ToList();
-            foreach( int i in fn_ids){
+            foreach (int i in fn_ids)
+            {
                 var fn = await _context.Food_Nutrient.FindAsync(i);
                 _context.Food_Nutrient.Remove(fn);
             }
 
             var food = await _context.Food.FindAsync(id);
             _context.Food.Remove(food);
-                   
-            
+
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -218,3 +287,10 @@ namespace MvcFood.Controllers
         }
     }
 }
+
+
+
+
+
+
+
