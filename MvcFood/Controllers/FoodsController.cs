@@ -63,17 +63,28 @@ namespace MvcFood.Controllers
             }
 
             var nut = foodnutrients.ToList();
-            var l = new List<String>();
-            string s="[\"";
+            //var l = new List<String>();
+            string s="[";
            
             foreach(FoodNutrients item in nut)
             {
-                l.Add(item.nutrientvm.nutrientName);
-                s= s+item.nutrientvm.nutrientName+"\",";
+                //l.Add(item.nutrientvm.nutrientName);
+                s= s+"\""+item.nutrientvm.nutrientName+"\",";
             }
             s=s.Remove(s.Length-1);
             s = s + "]";
-            s = "[\"Carb\",\"Fat\"]";
+            //s = "[\"Carb\",\"Fat\"]";
+
+            string s2 = "[";
+
+            foreach (FoodNutrients item in nut)
+            {
+                //l.Add(item.nutrientvm.nutrientName);
+                s2 = s2 + item.foodvm.value + ",";
+            }
+            s2 = s2.Remove(s2.Length - 1);
+            s2 = s2 + "]";
+
 
             //var l = nut[0];
             //String h = l.nutrientvm.nutrientName;
@@ -81,6 +92,7 @@ namespace MvcFood.Controllers
             var model = new Viewmodel();
             model.foodnutrients = foodnutrients;
             model.str = s;
+            model.num = s2;
             //foreach (FoodNutrients item2 in model.foodnutrients)
             //{
             //    var q = item2.foodvm.food;

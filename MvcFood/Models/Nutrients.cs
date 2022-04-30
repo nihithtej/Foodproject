@@ -19,7 +19,7 @@ namespace MvcFood.Models
     {
         public  IEnumerable<FoodNutrients> foodnutrients {get; set;}
         public string str{ get; set; }
-        //public string num { get; set; }
+        public string num { get; set; }
     }
 
 }
