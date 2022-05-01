@@ -1,13 +1,20 @@
 ﻿@model IEnumerable<MvcFood.Models.FoodTable>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Find your Food";
 }
 
-<h1>Index</h1>
-
+<h1>Find your Food</h1>
+<p> <b> Please use the filter the food item you want to search (It will fetch from local db). 
+     Use "Details" button to see the nutrion information, "Edit" button to rename the name of food and "Delete"" to delete from database.
+     <br />
+    Note: If you don't find the item, it is not in our database but you can always request for the food item use <u>'Request New Food Item'</u> button below.
+    </b> 
+    
+  
+    </p>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Request New Food Item</a>
 </p>
 <form asp-controller="Foods" asp-action="Display" method="get">
     <p>

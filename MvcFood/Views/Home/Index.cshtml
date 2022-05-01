@@ -1,11 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<b><p style="font-size:20px;">This website will help you find the nutrtion values in your food. Click on "Find your food" to find out!</p> </b><br />
  <h2>What's in your food?</h2>
 <p>
 Food is usually made of one or more items. Each item contains lot of components for the body to function properly.A balanced diet should include a wide variety of nutrients and other food components.
 From protein to polyphenols, fat to folate, it is the combination of these components that lead to good health and well-being.
+
+
             </p>
             <img class="six-image" src="images/nutirents_six.png" alt="nutrients six">
             <h2>What are the different types of nutrients?</h2>
@@ -44,8 +46,8 @@ From protein to polyphenols, fat to folate, it is the combination of these compo
                     <div class="widget">
                         <h5 class="flex-item"><b>Quick Links</b></h5>
                         <ul class="flex-item">
-                            <li><a href="Home.html">Home</a></li>
-                            <li><a href="About.html">About Us</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a></li>
 
                         </ul>
                     </div>

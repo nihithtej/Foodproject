@@ -1,15 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "About Page";
+}
+
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title>Home</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
 </head>
 
 
 <body style="background: rgb(233,223, 208)">
-        
+      
             <div class="page-container">
                 <div class="content-wrap">
                     <!-- Nav Bar -->
@@ -22,7 +26,7 @@
 
                             <div class="flex-item">
 
-                                <img src="images/nihith.png" class="card-img-top about-img" alt="Nihith Image" width="500" height="350">
+                                <img src="~/images/nihith.png" class="card-img-top about-img" alt="Nihith Image" width="500" height="350">
                                 <h2>Nihith Tej Gajelli</h2>
                                 <div>
 
@@ -41,7 +45,7 @@
 
 
                             <div class="flex-item">
-                                <img src="images/prasad-1.jpg" class="card-img-top about-img" alt="Prasad Image" width="500" height="350">
+                                <img src="~/images/prasad-1.jpg" class="card-img-top about-img" alt="Prasad Image" width="500" height="350">
                                 <h2>Prasad Hegde</h2>
                                 <div>
 
@@ -57,7 +61,7 @@
 
 
                             <div class="flex-item">
-                                <img src="images/sharat-1.jpeg" class="card-img-top about-img" alt="Sharat Image" width="500" height="350">
+                                <img src="~/images/sharat-1.jpeg" class="card-img-top about-img" alt="Sharat Image" width="500" height="350">
                                 <h2>Sharat Chandra</h2>
                                 <div>
 
@@ -70,5 +74,12 @@
                             </div>
 
                         </div>
+                         <div class="center mt-5">
+                            <h2 style="color:darkslategrey ;" class="center mb-5">ER Diagrams</h2>
+                            <img src="~/images/erd.png" class="img-fluid" alt="ER diagram">
+
+                        </div>
+                        <h2>API Endpoints</h2>
+                        <a href="https://api.nal.usda.gov/fdc/v1/">https://api.nal.usda.gov/fdc/v1/</a>
                     </body>
                     </html>

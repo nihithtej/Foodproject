@@ -10,6 +10,7 @@
 
 <h1>Nutrition Details</h1>
 
+<p style="font-size:20px;"><b>Note: Graph is end of this page. Please scroll to bottom.</b></p>
 
 
 <table class="table table-striped">
@@ -39,7 +40,7 @@
             labels: @Html.Raw(@Model.str),
             datasets: [{
                 label: "Nutrition Information",
-                backgroundColor: ["#3e95cd", "#8e5ea2"],
+                backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
                 data: @Html.Raw(@Model.num)
             }]
         },

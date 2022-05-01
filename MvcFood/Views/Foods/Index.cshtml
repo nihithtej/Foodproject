@@ -1,16 +1,20 @@
 ﻿@model MvcFood.Models.Foodresults
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Find your food";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Index</h1>
+<div class="align-content-md-start">
+    <h1 class="display-4">Please enter the Food Item to Search.</h1>
+        <p> <b>Note: Please enter the food item you want to search in search bar and then press enter (Wait for 2 seconds while it fetches details from api and populates in db ). 
+            <br />To View the result - Please press Next. 
+    </b> </p>
+
     
 </div>
-<form asp-controller="Foods" asp-action="Index" method="get">
+<form asp-controller="Foods" asp-action="Index"  method="get">
     <p>
-        Title: <input type="text" name="SearchString" />
+        Title: <input type="text" name="SearchString" placeholder="butter" />
        @* <input type="submit" value="Filter" />*@
     </p>
 </form>
