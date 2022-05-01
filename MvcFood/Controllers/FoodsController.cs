@@ -267,29 +267,65 @@ namespace MvcFood.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int fdcId,String description, string n1name)
+        public async Task<IActionResult> Create(String description)
         {
-            
+            FoodTable fcreate = new FoodTable();
             //[Bind("fdcId,description")]  FoodTable food
             if (ModelState.IsValid)
             {
-                NutrientTable ncreate = new NutrientTable();
-                //var list = new List<string>();
-                var strlist = n1name.Split(';');
-                //foreach(string item in strlist)
+                
+                fcreate.fdcId = 101;
+                fcreate.description = description;
+                try
+                {
+                    _context.FoodTable.Add(fcreate);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    _context.FoodTable.Update(fcreate);
+                    _context.SaveChanges();
+                }
+                
+
+                //NutrientTable ncreate = new NutrientTable();
+                Food_NutrientTable fncreate = new Food_NutrientTable();
+                ////var list = new List<string>();
+                //var strlist = n1name.Split(';');
+                //foreach (string item in strlist)
                 //{
                 //    var valuelist = item.Split(',');
-                //    ncreate.nutrientName = valuelist[0];
-                //    ncreate. = 
+                //  ncreate.nutrientName = valuelist[0];
+                //    ncreate.nutrientId = Convert.ToInt32(valuelist[1]);
+                fncreate.value = 1;
+                //fncreate.food.fdcId = 1;
+                fncreate.food = fcreate;
+                try
+                {
+                    _context.Food_NutrientTable.Add(fncreate);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    _context.Food_NutrientTable.Update(fncreate);
+                    _context.SaveChanges();
+                }
+               
+                //    ncreate.nutrientId = Convert.ToInt32(valuelist[1]);
                 //}
-                FoodTable fcreate=new FoodTable();
-                fcreate.fdcId = fdcId;
-                fcreate.description = description;
-                _context.Add(fcreate);
-                await _context.SaveChangesAsync();
+
+
+                //Food_NutrientTable fn1 = new Food_NutrientTable();
+                //fn1.value = item2.value;
+                //fn1.unitName = item2.unitName;
+                //fn1.food = food1;
+                //fn1.nutrient = nutrient1;
+                ////fn1.nutrient = nutrient1;
+                //_context.Food_NutrientTable.Add(fn1);
+
                 return RedirectToAction(nameof(Index));
             }
-            return View("~/Views/Foods/Display.cshtml");
+            return View(fcreate);
         }
 
         // GET: Foods/Edit/5
