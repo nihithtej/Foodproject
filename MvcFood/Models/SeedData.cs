@@ -15,30 +15,30 @@ namespace MvcFood.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<MvcFoodContext>>()))
             {
-                // Look for any movies.
+                //Look for any movies.
                 //if (context.Food.Any())
-                //{
-                //    return;   // DB has been seeded
-               // }
+                //    {
+                //        return;   // DB has been seeded
+                //    }
 
-                //Food food1 = new Food();
+                //FoodTable food1 = new FoodTable();
                 //food1.description = "apple";
-                
-                //context.Food.Add(food1);
+
+                //context.FoodTable.Add(food1);
                 //context.SaveChanges();
 
-                //Nutrient nutrient1 = new Nutrient();
+                //NutrientTable nutrient1 = new NutrientTable();
                 //nutrient1.nutrientName = "Carbohydrates";
                 //nutrient1.nutrientNumber = 1;
-                //context.Nutrient.Add(nutrient1);
+                //context.NutrientTable.Add(nutrient1);
                 //context.SaveChanges();
 
-                //Food_Nutrient fn1 = new Food_Nutrient();
+                //Food_NutrientTable fn1 = new Food_NutrientTable();
                 //fn1.value = 1;
                 //fn1.unitName = "mg";
                 //fn1.food = food1;
                 //fn1.nutrient = nutrient1;
-                //context.Food_Nutrient.Add(fn1);
+                //context.Food_NutrientTable.Add(fn1);
                 //context.SaveChanges();
 
             }

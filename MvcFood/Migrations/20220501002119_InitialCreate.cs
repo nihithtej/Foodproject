@@ -7,7 +7,7 @@ namespace MvcFood.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Food",
+                name: "FoodTable",
                 columns: table => new
                 {
                     fdcId = table.Column<int>(type: "int", nullable: false)
@@ -16,11 +16,11 @@ namespace MvcFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Food", x => x.fdcId);
+                    table.PrimaryKey("PK_FoodTable", x => x.fdcId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Nutrient",
+                name: "NutrientTable",
                 columns: table => new
                 {
                     nutrientId = table.Column<int>(type: "int", nullable: false)
@@ -30,11 +30,11 @@ namespace MvcFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Nutrient", x => x.nutrientId);
+                    table.PrimaryKey("PK_NutrientTable", x => x.nutrientId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Food_Nutrient",
+                name: "Food_NutrientTable",
                 columns: table => new
                 {
                     FNId = table.Column<int>(type: "int", nullable: false)
@@ -46,42 +46,42 @@ namespace MvcFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Food_Nutrient", x => x.FNId);
+                    table.PrimaryKey("PK_Food_NutrientTable", x => x.FNId);
                     table.ForeignKey(
-                        name: "FK_Food_Nutrient_Food_foodfdcId",
+                        name: "FK_Food_NutrientTable_FoodTable_foodfdcId",
                         column: x => x.foodfdcId,
-                        principalTable: "Food",
+                        principalTable: "FoodTable",
                         principalColumn: "fdcId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Food_Nutrient_Nutrient_nutrientId",
+                        name: "FK_Food_NutrientTable_NutrientTable_nutrientId",
                         column: x => x.nutrientId,
-                        principalTable: "Nutrient",
+                        principalTable: "NutrientTable",
                         principalColumn: "nutrientId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_Nutrient_foodfdcId",
-                table: "Food_Nutrient",
+                name: "IX_Food_NutrientTable_foodfdcId",
+                table: "Food_NutrientTable",
                 column: "foodfdcId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_Nutrient_nutrientId",
-                table: "Food_Nutrient",
+                name: "IX_Food_NutrientTable_nutrientId",
+                table: "Food_NutrientTable",
                 column: "nutrientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Food_Nutrient");
+                name: "Food_NutrientTable");
 
             migrationBuilder.DropTable(
-                name: "Food");
+                name: "FoodTable");
 
             migrationBuilder.DropTable(
-                name: "Nutrient");
+                name: "NutrientTable");
         }
     }
 }

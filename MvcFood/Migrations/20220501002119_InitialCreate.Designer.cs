@@ -10,7 +10,7 @@ using MvcFood.Data;
 namespace MvcFood.Migrations
 {
     [DbContext(typeof(MvcFoodContext))]
-    [Migration("20220429172036_InitialCreate")]
+    [Migration("20220501002119_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace MvcFood.Migrations
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MvcFood.Models.Food", b =>
+            modelBuilder.Entity("MvcFood.Models.FoodTable", b =>
                 {
                     b.Property<int>("fdcId")
                         .ValueGeneratedOnAdd()
@@ -33,10 +33,10 @@ namespace MvcFood.Migrations
 
                     b.HasKey("fdcId");
 
-                    b.ToTable("Food");
+                    b.ToTable("FoodTable");
                 });
 
-            modelBuilder.Entity("MvcFood.Models.Food_Nutrient", b =>
+            modelBuilder.Entity("MvcFood.Models.Food_NutrientTable", b =>
                 {
                     b.Property<int>("FNId")
                         .ValueGeneratedOnAdd()
@@ -61,10 +61,10 @@ namespace MvcFood.Migrations
 
                     b.HasIndex("nutrientId");
 
-                    b.ToTable("Food_Nutrient");
+                    b.ToTable("Food_NutrientTable");
                 });
 
-            modelBuilder.Entity("MvcFood.Models.Nutrient", b =>
+            modelBuilder.Entity("MvcFood.Models.NutrientTable", b =>
                 {
                     b.Property<int>("nutrientId")
                         .ValueGeneratedOnAdd()
@@ -79,16 +79,16 @@ namespace MvcFood.Migrations
 
                     b.HasKey("nutrientId");
 
-                    b.ToTable("Nutrient");
+                    b.ToTable("NutrientTable");
                 });
 
-            modelBuilder.Entity("MvcFood.Models.Food_Nutrient", b =>
+            modelBuilder.Entity("MvcFood.Models.Food_NutrientTable", b =>
                 {
-                    b.HasOne("MvcFood.Models.Food", "food")
+                    b.HasOne("MvcFood.Models.FoodTable", "food")
                         .WithMany("food_nutrients")
                         .HasForeignKey("foodfdcId");
 
-                    b.HasOne("MvcFood.Models.Nutrient", "nutrient")
+                    b.HasOne("MvcFood.Models.NutrientTable", "nutrient")
                         .WithMany("food_nutrients")
                         .HasForeignKey("nutrientId");
 
@@ -97,12 +97,12 @@ namespace MvcFood.Migrations
                     b.Navigation("nutrient");
                 });
 
-            modelBuilder.Entity("MvcFood.Models.Food", b =>
+            modelBuilder.Entity("MvcFood.Models.FoodTable", b =>
                 {
                     b.Navigation("food_nutrients");
                 });
 
-            modelBuilder.Entity("MvcFood.Models.Nutrient", b =>
+            modelBuilder.Entity("MvcFood.Models.NutrientTable", b =>
                 {
                     b.Navigation("food_nutrients");
                 });

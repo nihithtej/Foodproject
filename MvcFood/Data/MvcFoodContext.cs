@@ -14,8 +14,8 @@ namespace MvcFood.Data
         {
         }
 
-        public DbSet<MvcFood.Models.Food> Food { get; set; }
-        public DbSet<MvcFood.Models.Nutrient> Nutrient { get; set; }
-        public DbSet<MvcFood.Models.Food_Nutrient> Food_Nutrient { get; set; }
+        public DbSet<MvcFood.Models.FoodTable> FoodTable { get; set; }
+        public DbSet<MvcFood.Models.NutrientTable> NutrientTable { get; set; }
+        public DbSet<MvcFood.Models.Food_NutrientTable> Food_NutrientTable { get; set; }
     }
 }

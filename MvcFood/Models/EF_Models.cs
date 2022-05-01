@@ -10,20 +10,20 @@ namespace MvcFood.Models
             [Key]
             public int fdcId { get; set; }
             public string description { get; set; }
-            public List<Food_Nutrient> food_nutrients { get; set; }
+            public List<Food_NutrientTable> food_nutrients { get; set; }
         }
 
-        public class Nutrient
+        public class NutrientTable
         {
             [Key]
             public int nutrientId { get; set; }
             public string nutrientName { get; set; }
-            public int nutrientNumber { get; set; }
-            public List<Food_Nutrient> food_nutrients { get; set; }
+            //public int nutrientNumber { get; set; }
+            public List<Food_NutrientTable> food_nutrients { get; set; }
 
         }
 
-        public class Food_Nutrient
+        public class Food_NutrientTable
         {
             [Key]
             public int FNId { get; set; }
@@ -32,9 +32,9 @@ namespace MvcFood.Models
 
             public string unitName { get; set; }
 
-            public Food food { get; set; }
+            public FoodTable food { get; set; }
 
-            public Nutrient nutrient { get; set; }
+            public NutrientTable nutrient { get; set; }
         
         }
     

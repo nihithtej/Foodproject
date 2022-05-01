@@ -52,7 +52,57 @@ namespace MvcFood.Controllers
                 if (!nutritionData.Equals(""))
                 {
                     foodresults = JsonConvert.DeserializeObject<Foodresults>(nutritionData);
-                    foodresults = JsonConvert.DeserializeObject<Foodresults>(nutritionData);
+
+  
+                }
+
+                if (foodresults != null)
+                {
+                    //var q = (from f in _context.FoodTable
+                     //       select new {f.fdcId}).ToList();
+                    FoodTable food1 = new FoodTable();
+                    NutrientTable nutrient1 = new NutrientTable();
+                    Food_NutrientTable fn1= new Food_NutrientTable();
+                    
+                    foreach (Food item in foodresults.foods)
+                    {
+                        //bool x = q.Contains();
+
+                        food1.fdcId = item.fdcId;
+                        food1.description = item.description;
+                        
+                        _context.FoodTable.Add(food1);
+                        _context.SaveChanges();
+                        foreach (Foodnutrient item2 in item.foodNutrients)
+                        {
+                            nutrient1.nutrientId = item2.nutrientId;
+                            nutrient1.nutrientName=item2.nutrientName;
+                          
+                          
+                            _context.NutrientTable.Add(nutrient1);
+                            _context.SaveChanges();
+                            fn1.value = item2.value;
+                            fn1.unitName = item2.unitName;
+                            fn1.food = food1;
+                            fn1.nutrient = nutrient1;
+                            //fn1.nutrient = nutrient1;
+                            _context.Food_NutrientTable.Add(fn1);
+                            _context.SaveChanges();
+                            
+
+
+                        }
+                    }
+
+
+
+                    //Food_NutrientTable fn1 = new Food_NutrientTable();
+                    //fn1.value = 1;
+                    //fn1.unitName = "mg";
+                    //fn1.food = food1;
+                    //fn1.nutrient = nutrient1;
+                    //context.Food_NutrientTable.Add(fn1);
+                    //context.SaveChanges();
                 }
             }
 
@@ -90,7 +140,7 @@ namespace MvcFood.Controllers
         // GET: Foods 
         public async Task<IActionResult> Display(string searchString)
         {
-            var foods = from f in _context.Food
+            var foods = from f in _context.FoodTable
                         select f;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -110,8 +160,8 @@ namespace MvcFood.Controllers
             }
 
 
-            var foodnutrients = from f in _context.Food_Nutrient
-                                join m in _context.Nutrient on f.nutrient.nutrientId equals m.nutrientId
+            var foodnutrients = from f in _context.Food_NutrientTable
+                                join m in _context.NutrientTable on f.nutrient.nutrientId equals m.nutrientId
                                 where f.food.fdcId == id
                                 select new FoodNutrients { foodvm = f, nutrientvm = m };
             //var food = await _context.Food
@@ -181,7 +231,7 @@ namespace MvcFood.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("fdcId,description")] Food food)
+        public async Task<IActionResult> Create([Bind("fdcId,description")] FoodTable food)
         {
             if (ModelState.IsValid)
             {
@@ -200,7 +250,7 @@ namespace MvcFood.Controllers
                 return NotFound();
             }
 
-            var food = await _context.Food.FindAsync(id);
+            var food = await _context.FoodTable.FindAsync(id);
             if (food == null)
             {
                 return NotFound();
@@ -213,7 +263,7 @@ namespace MvcFood.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("fdcId,description")] Food food)
+        public async Task<IActionResult> Edit(int id, [Bind("fdcId,description")] FoodTable food)
         {
             if (id != food.fdcId)
             {
@@ -251,7 +301,7 @@ namespace MvcFood.Controllers
                 return NotFound();
             }
 
-            var food = await _context.Food
+            var food = await _context.FoodTable
                 .FirstOrDefaultAsync(m => m.fdcId == id);
             if (food == null)
             {
@@ -266,15 +316,15 @@ namespace MvcFood.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            List<int> fn_ids = _context.Food_Nutrient.Where(x => x.food.fdcId == id).Select(x => x.FNId).ToList();
+            List<int> fn_ids = _context.Food_NutrientTable.Where(x => x.food.fdcId == id).Select(x => x.FNId).ToList();
             foreach (int i in fn_ids)
             {
-                var fn = await _context.Food_Nutrient.FindAsync(i);
-                _context.Food_Nutrient.Remove(fn);
+                var fn = await _context.Food_NutrientTable.FindAsync(i);
+                _context.Food_NutrientTable.Remove(fn);
             }
 
-            var food = await _context.Food.FindAsync(id);
-            _context.Food.Remove(food);
+            var food = await _context.FoodTable.FindAsync(id);
+            _context.FoodTable.Remove(food);
 
 
             await _context.SaveChangesAsync();
@@ -283,7 +333,7 @@ namespace MvcFood.Controllers
 
         private bool FoodExists(int id)
         {
-            return _context.Food.Any(e => e.fdcId == id);
+            return _context.FoodTable.Any(e => e.fdcId == id);
         }
     }
 }
