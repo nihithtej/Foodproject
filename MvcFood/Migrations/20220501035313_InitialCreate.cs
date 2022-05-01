@@ -25,8 +25,7 @@ namespace MvcFood.Migrations
                 {
                     nutrientId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nutrientName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    nutrientNumber = table.Column<int>(type: "int", nullable: false)
+                    nutrientName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

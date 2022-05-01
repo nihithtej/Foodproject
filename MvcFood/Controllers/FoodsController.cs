@@ -61,8 +61,8 @@ namespace MvcFood.Controllers
                     //var q = (from f in _context.FoodTable
                      //       select new {f.fdcId}).ToList();
                     FoodTable food1 = new FoodTable();
-                    NutrientTable nutrient1 = new NutrientTable();
-                    Food_NutrientTable fn1= new Food_NutrientTable();
+                    //NutrientTable nutrient1 = new NutrientTable();
+                    //Food_NutrientTable fn1= new Food_NutrientTable();
                     
                     foreach (Food item in foodresults.foods)
                     {
@@ -71,21 +71,23 @@ namespace MvcFood.Controllers
                         food1.fdcId = item.fdcId;
                         food1.description = item.description;
                         
-                        _context.FoodTable.Add(food1);
+                        _context.FoodTable.Update(food1);
                         _context.SaveChanges();
                         foreach (Foodnutrient item2 in item.foodNutrients)
                         {
+                            NutrientTable nutrient1 = new NutrientTable();
                             nutrient1.nutrientId = item2.nutrientId;
                             nutrient1.nutrientName=item2.nutrientName;
-                          
-                          
-                            _context.NutrientTable.Add(nutrient1);
+
+                            Food_NutrientTable fn1 = new Food_NutrientTable();
+                            _context.NutrientTable.Update(nutrient1);
                             _context.SaveChanges();
                             fn1.value = item2.value;
                             fn1.unitName = item2.unitName;
                             fn1.food = food1;
                             fn1.nutrient = nutrient1;
                             //fn1.nutrient = nutrient1;
+                            
                             _context.Food_NutrientTable.Add(fn1);
                             _context.SaveChanges();
                             

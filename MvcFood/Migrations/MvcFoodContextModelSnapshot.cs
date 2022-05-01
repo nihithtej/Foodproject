@@ -72,9 +72,6 @@ namespace MvcFood.Migrations
                     b.Property<string>("nutrientName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("nutrientNumber")
-                        .HasColumnType("int");
-
                     b.HasKey("nutrientId");
 
                     b.ToTable("NutrientTable");

@@ -10,7 +10,7 @@ using MvcFood.Data;
 namespace MvcFood.Migrations
 {
     [DbContext(typeof(MvcFoodContext))]
-    [Migration("20220501002119_InitialCreate")]
+    [Migration("20220501035313_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,9 +73,6 @@ namespace MvcFood.Migrations
 
                     b.Property<string>("nutrientName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("nutrientNumber")
-                        .HasColumnType("int");
 
                     b.HasKey("nutrientId");
 
